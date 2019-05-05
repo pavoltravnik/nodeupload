@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const multer = require('multer')
 const cors = require('cors');
-var upload = multer({ dest: '/home/dockeruser/export/' })
+var upload = multer({ dest: 'uploads/' })
 
 app.use(cors());
 
