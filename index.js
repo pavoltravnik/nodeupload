@@ -5,14 +5,14 @@ const cors = require('cors');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/home/dockeruser/export/')
+      cb(null, '/home/dockeruser/export')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now())
     }
 });
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage }).single('file');
 
 app.use(cors());
 
@@ -20,11 +20,16 @@ app.get('/upload', function (req, res) {
     res.send('hello world');
 });
 
-app.post('/upload', upload.single('file'), function (req, res, next) {
-    console.log(req.file);
-    console.log(req.file.originalname.split('.').pop());
-    res.sendStatus(200);
-  })
+app.post('/upload',function(req, res) {
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err);
+        } else if (err) {
+            return res.status(500).json(err);
+        }
+    return res.sendStatus(200);
+    });
+});
 
 app.listen(3000, () => {
   console.log("Server started!");
