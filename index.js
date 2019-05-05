@@ -3,7 +3,16 @@ const app = express();
 const multer = require('multer')
 const cors = require('cors');
 
-var upload = multer({ dest: 'uploads/' }).single('file');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage }).single('file');
 
 app.use(cors());
 
@@ -18,6 +27,7 @@ app.post('/upload',function(req, res) {
         } else if (err) {
             return res.status(500).json(err);
         }
+    console.log(req.file);
     return res.sendStatus(200);
     });
 });
