@@ -16,6 +16,6 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
     console.log(req.file.originalname.split('.').pop());
   })
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log("Server started!");
 });
