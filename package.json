@@ -1,0 +1,22 @@
+{
+  "name": "nodeupload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavoltravnik/nodeupload.git"
+  },
+  "author": "Pavol Travnik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavoltravnik/nodeupload/issues"
+  },
+  "homepage": "https://github.com/pavoltravnik/nodeupload#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
