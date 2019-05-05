@@ -1,12 +1,35 @@
 const express = require('express');
-
-const PORT = 3000;
-const HOST = '0.0.0.0';
-
 const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello world dfvdfv\n');
+const multer = require('multer')
+const cors = require('cors');
+
+app.use(cors());
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    cb(null, 'public');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' +file.originalname );
+  }
 });
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+const upload = multer({ storage: storage }).single('file');
+
+app.post('/upload',function(req, res) {
+
+    upload(req, res, function (err) {
+           if (err instanceof multer.MulterError) {
+               return res.status(500).json(err)
+           } else if (err) {
+               return res.status(500).json(err)
+           }
+      return res.status(200).send(req.file)
+
+    })
+
+});
+
+app.listen(3000, () => {
+  console.log("Server started!");
+});
