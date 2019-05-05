@@ -2,7 +2,17 @@ const express = require('express');
 const app = express();
 const multer = require('multer')
 const cors = require('cors');
-var upload = multer({ dest: '/home/dockeruser/export' })
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '/home/dockeruser/export')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+
+const upload = multer({ storage: storage })
 
 app.use(cors());
 
