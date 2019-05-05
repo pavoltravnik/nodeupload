@@ -28,9 +28,7 @@ app.post('/upload',function(req, res) {
         } else if (err) {
             return res.status(500).json(err);
         }
-    exec('docker exec ipfs_host ipfs add /export/'+req.file.filename)
-        .then(a => console.log(a))
-        .catch(err => console.log(err));
+    exec('docker exec ipfs_host ipfs add /export/'+req.file.filename);
     return res.sendStatus(200);
     });
 });
