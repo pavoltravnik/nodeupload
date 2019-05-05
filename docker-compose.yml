@@ -1,0 +1,12 @@
+version: '3'
+services:
+  node:
+    image: "node:8"
+    container_name: "node"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: "npm start"
+    ports:
+      - "4000:4000"
