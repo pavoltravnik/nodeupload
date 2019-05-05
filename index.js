@@ -13,6 +13,7 @@ app.get('/upload', function (req, res) {
 app.post('/upload', upload.single('file'), function (req, res, next) {
     console.log(req.file);
     console.log(req.file.originalname.split('.').pop());
+    res.send(200);
   })
 
 app.listen(3000, () => {
