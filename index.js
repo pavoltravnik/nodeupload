@@ -30,7 +30,7 @@ app.post('/upload',function(req, res) {
             return res.status(500).json(err);
         }
 
-        var formData = {
+        const formData = {
             file: fs.createReadStream(req.file.path),
         };
 
@@ -42,7 +42,7 @@ app.post('/upload',function(req, res) {
             console.log('Upload successful!  Server responded with:', body);
         });
 
-        return res.sendStatus(200);
+        return res.sendStatus(200).send('aaaa');
     });
 });
 
