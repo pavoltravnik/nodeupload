@@ -31,13 +31,9 @@ app.post('/upload',function(req, res) {
         }
     const data = new FormData();
     data.append('file', req.file);
-    fetch('http://localhost:5001/api/v0/add', {
-        method: 'POST',
-        body: data
-      })
-      .then(response => response.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', JSON.stringify(response)));
+    data.submit('http://localhost:5001/api/v0/add', function(err, res) {
+        res.resume();
+    });
     return res.sendStatus(200);
     });
 });
