@@ -32,7 +32,8 @@ app.post('/upload',function(req, res) {
             return res.status(500).json(err);
         }
     const data = new FormData();
-    data.append('my_file', fs.createReadStream(req.file.path));
+    console.log(req.file.path);
+    data.append('file', fs.createReadStream(req.file.path));
 
     data.submit('http://ipfs_host:5001/upload', function(err, res) {
         console.log(err);
