@@ -39,6 +39,7 @@ app.post('/upload',function(req, res) {
                 return console.error('upload failed:', err);
             }
             console.log('Upload successful!  Server responded with:', body);
+            return res.status(200).json(body);
         });
 
     return res.status(200).json({a: 1});
