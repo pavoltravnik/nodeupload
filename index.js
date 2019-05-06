@@ -29,11 +29,6 @@ app.post('/upload',function(req, res) {
         } else if (err) {
             return res.status(500).json(err);
         }
-    const data = new FormData();
-    data.append('file', req.file);
-    data.submit('http://localhost:5001/api/v0/add', function(err, res) {
-        res.resume();
-    });
     return res.sendStatus(200);
     });
 });
