@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const multer = require('multer')
 const cors = require('cors');
-const FormData = require('form-data');
 const fs = require('fs');
 const http = require('http');
 
@@ -31,13 +30,16 @@ app.post('/upload',function(req, res) {
         } else if (err) {
             return res.status(500).json(err);
         }
-    const data = new FormData();
-    console.log(req.file.path);
-    data.append('file', fs.createReadStream(req.file.path));
 
-    data.submit('http://ipfs_host:5001/upload', function(err, res) {
-        console.log(err);
-        console.log(res);
+    var formData = {
+        file: fs.createReadStream(req.file.path),
+    };
+
+    http.request.post({url:'http://ipfs_host:5001/upload', formData: formData}, function(err, httpResponse, body) {
+        if (err) {
+            return console.error('upload failed:', err);
+        }
+        console.log('Upload successful!  Server responded with:', body);
     });
 
     return res.sendStatus(200);
