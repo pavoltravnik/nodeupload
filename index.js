@@ -25,24 +25,22 @@ app.get('/upload', function (req, res) {
 app.post('/upload',function(req, res) {
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
-            return res.status(500).json(err);
+            return res.sendStatus(500).json(err);
         } else if (err) {
-            return res.status(500).json(err);
+            return res.sendStatus(500).json(err);
         }
 
-    var formData = {
-        file: fs.createReadStream(req.file.path),
-    };
+        var formData = {
+            file: fs.createReadStream(req.file.path),
+        };
 
-    request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, httpResponse, body) {
-        if (err) {
-            return console.error('upload failed:', err);
-        }
-        console.log(httpResponse);
-        console.log('Upload successful!  Server responded with:', body);
-    });
+        request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, _, body) {
+            if (err) {
+                return res.sendStatus(500).json(err);
+            }
+            return res.sendStatus(200).json(body);
+        });
 
-    return res.sendStatus(200);
     });
 });
 
