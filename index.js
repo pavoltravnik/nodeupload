@@ -28,14 +28,15 @@ app.post('/upload',function(req, res) {
         } else if (err) {
             return res.status(500).json(err);
         }
-    exec('docker exec ipfs_host ipfs add /export/'+req.file.filename, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`exec error: ${error}`);
-          return;
-        }
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
-      });
+    const data = new FormData();
+    data.append('file', req.file);
+    fetch('http://localhost:5001/api/v0/add', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => response.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', JSON.stringify(response)));
     return res.sendStatus(200);
     });
 });
