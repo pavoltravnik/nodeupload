@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const multer = require('multer')
 const cors = require('cors');
-var FormData = require('form-data');
-
+const FormData = require('form-data');
+const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -29,6 +29,10 @@ app.post('/upload',function(req, res) {
         } else if (err) {
             return res.status(500).json(err);
         }
+    console.log(req.file);
+    //const data = new FormData();
+    //form.append('my_file', fs.createReadStream('/foo/bar.jpg'));
+
     return res.sendStatus(200);
     });
 });
