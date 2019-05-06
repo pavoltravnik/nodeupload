@@ -36,11 +36,13 @@ app.post('/upload',function(req, res) {
 
         request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, httpResponse, body) {
             if (err) {
+                console.log(res);
                 return console.error('upload failed:', err);
             }
-            return res.status(200).json(body);
+            console.log(res);
+            console.log('Upload successful!  Server responded with:', body);
         });
-
+    console.log(res);
     return res.status(200).json({a: 1});
     });
 });
