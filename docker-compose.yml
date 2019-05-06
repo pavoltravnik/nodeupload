@@ -12,7 +12,7 @@ services:
 
   ipfs_host:
     image: ipfs/go-ipfs:latest
-    name: ipfs_host
+    container_name: ipfs_host
     volumes:
       - /home/dockeruser/nodeupload/uploads:/export
       - /home/dockeruser/data:/data/ipfs
