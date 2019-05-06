@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const multer = require('multer')
 const cors = require('cors');
-const { exec } = require('child_process');
+var FormData = require('form-data');
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -29,6 +30,7 @@ app.post('/upload',function(req, res) {
             return res.status(500).json(err);
         }
     const data = new FormData();
+    console.log(req.file);
     data.append('file', req.file);
     fetch('http://localhost:5001/api/v0/add', {
         method: 'POST',
