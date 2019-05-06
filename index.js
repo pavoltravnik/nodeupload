@@ -30,16 +30,18 @@ app.post('/upload',function(req, res) {
             return res.sendStatus(500).json(err);
         }
 
-        var formData = {
+        const formData = {
             file: fs.createReadStream(req.file.path),
         };
 
-        request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, _, body) {
+        const response = request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, _, body) {
             if (err) {
-                return res.sendStatus(500).json(err);
+                return err;
             }
-            return res.sendStatus(200).json(body);
+            return body;
         });
+
+        return res.sendStatus(200).json(response);
 
     });
 });
