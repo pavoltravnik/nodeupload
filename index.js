@@ -30,7 +30,6 @@ app.post('/upload',function(req, res) {
             return res.status(500).json(err);
         }
     const data = new FormData();
-    console.log(req.file);
     data.append('file', req.file);
     fetch('http://localhost:5001/api/v0/add', {
         method: 'POST',
