@@ -36,7 +36,7 @@ app.post('/upload',function(req, res) {
 
     data.submit('http://ipfs_host:5001/upload', function(err, res) {
         console.log(err);
-        res.resume();
+        console.log(res);
     });
 
     return res.sendStatus(200);
