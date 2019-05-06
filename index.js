@@ -34,7 +34,7 @@ app.post('/upload',function(req, res) {
         file: fs.createReadStream(req.file.path),
     };
 
-    request.post({url:'http://ipfs_host:5001/upload', formData: formData}, function(err, httpResponse, body) {
+    request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, httpResponse, body) {
         if (err) {
             return console.error('upload failed:', err);
         }
