@@ -4,7 +4,6 @@ const multer = require('multer')
 const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
-form-data
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
