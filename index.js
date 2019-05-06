@@ -4,7 +4,7 @@ const multer = require('multer')
 const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
-
+form-data
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -39,6 +39,7 @@ app.post('/upload',function(req, res) {
         if (err) {
             return console.error('upload failed:', err);
         }
+        console.log(httpResponse);
         console.log('Upload successful!  Server responded with:', body);
     });
 
