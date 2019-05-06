@@ -4,6 +4,8 @@ const multer = require('multer')
 const cors = require('cors');
 const FormData = require('form-data');
 const fs = require('fs');
+const http = require('http');
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -29,9 +31,15 @@ app.post('/upload',function(req, res) {
         } else if (err) {
             return res.status(500).json(err);
         }
-    console.log(req.file);
-    //const data = new FormData();
-    //form.append('my_file', fs.createReadStream('/foo/bar.jpg'));
+    const data = new FormData();
+    data.append('my_file', fs.createReadStream(req.file.path));
+    fetch('http://localhost:4001/upload', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => response.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', JSON.stringify(response)));
 
     return res.sendStatus(200);
     });
