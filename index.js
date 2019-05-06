@@ -41,7 +41,7 @@ app.post('/upload',function(req, res) {
             console.log('Upload successful!  Server responded with:', body);
         });
 
-    return res.sendStatus(200).json({a:1});
+    return res.status(200).json({a: 1});
     });
 });
 
