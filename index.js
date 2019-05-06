@@ -33,13 +33,11 @@ app.post('/upload',function(req, res) {
         }
     const data = new FormData();
     data.append('my_file', fs.createReadStream(req.file.path));
-    fetch('http://localhost:4001/upload', {
-        method: 'POST',
-        body: data
-      })
-      .then(response => response.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', JSON.stringify(response)));
+
+    data.submit('http://localhost:4001/upload', function(err, res) {
+        console.log(err);
+        res.resume();
+    });
 
     return res.sendStatus(200);
     });
