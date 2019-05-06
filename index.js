@@ -3,7 +3,7 @@ const app = express();
 const multer = require('multer')
 const cors = require('cors');
 const fs = require('fs');
-const http = require('http');
+const request = require('request');
 
 
 const storage = multer.diskStorage({
@@ -35,7 +35,7 @@ app.post('/upload',function(req, res) {
         file: fs.createReadStream(req.file.path),
     };
 
-    http.request.post({url:'http://ipfs_host:5001/upload', formData: formData}, function(err, httpResponse, body) {
+    request.post({url:'http://ipfs_host:5001/upload', formData: formData}, function(err, httpResponse, body) {
         if (err) {
             return console.error('upload failed:', err);
         }
