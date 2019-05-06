@@ -40,7 +40,6 @@ app.post('/upload',function(req, res) {
             }
             return res.status(200).json(body);
         });
-        console.log(a);
 
     return res.status(200).json({a: 1});
     });
