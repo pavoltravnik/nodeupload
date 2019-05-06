@@ -4,6 +4,7 @@ const multer = require('multer')
 const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
+form-data
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -30,19 +31,18 @@ app.post('/upload',function(req, res) {
             return res.status(500).json(err);
         }
 
-        var formData = {
-            file: fs.createReadStream(req.file.path),
-        };
+    var formData = {
+        file: fs.createReadStream(req.file.path),
+    };
 
-        request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, httpResponse, body) {
-            if (err) {
-                console.error('upload failed:', err);
-            }
-            console.log(httpResponse);
-            console.log('Upload successful!  Server responded with:', body);
-        });
+    request.post({url:'http://ipfs_host:5001/upload', formData: formData}, function(err, httpResponse, body) {
+        if (err) {
+            return console.error('upload failed:', err);
+        }
+        console.log('Upload successful!  Server responded with:', body);
+    });
 
-        return res.sendStatus(200).json('aaaa');
+    return res.sendStatus(200);
     });
 });
 
