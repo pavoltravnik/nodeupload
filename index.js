@@ -34,14 +34,14 @@ app.post('/upload',function(req, res) {
             file: fs.createReadStream(req.file.path),
         };
 
-        const response = request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, _, body) {
+        request.post({url:'http://ipfs_host:5001/api/v0/add', formData: formData}, function(err, httpResponse, body) {
             if (err) {
-                return err;
+                return console.error('upload failed:', err);
             }
-            return body;
+            return res.sendStatus(200).json(body);
         });
 
-        return res.sendStatus(200).json(response);
+        return res.sendStatus(200).send('aaa');
 
     });
 });
