@@ -7,8 +7,6 @@ RUN npm install
 
 COPY . .
 
-ENV RPC_IPADDRESS=127.0.0.1
-
 EXPOSE 3000
 
 CMD [ "npm", "run", "start.dev" ]
