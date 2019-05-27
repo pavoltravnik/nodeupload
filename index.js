@@ -25,7 +25,7 @@ app.get('/upload', function (req, res) {
 });
 
 app.get('/getrawtransaction', function (req, res) {
-    res.status(200).json(RPC_IPADDRESS,RPC_USERNAME);
+    res.status(200).json(RPC_USERNAME);
     /*
     const formData = {
         jsonrpc: '1.0',
