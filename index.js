@@ -5,7 +5,7 @@ const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
 
-const { RPC_USERNAME, RPC_PASSWORD, RPC_IPADDRESS='not set', RPC_PORT } = proccess.env;
+const { RPC_USERNAME, RPC_PASSWORD, RPC_IPADDRESS='not set', RPC_PORT } = process.env;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
