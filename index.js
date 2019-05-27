@@ -24,9 +24,9 @@ app.get('/upload', function (req, res) {
     res.send('hello world');
 });
 
-/*
 app.get('/getrawtransaction', function (req, res) {
     res.status(200).json(RPC_IPADDRESS);
+    /*
     const formData = {
         jsonrpc: '1.0',
         id: 'curltext',
@@ -40,8 +40,8 @@ app.get('/getrawtransaction', function (req, res) {
         }
         return res.status(200).json(body);
     });
+    */
 });
-*/
 
 app.post('/upload',function(req, res) {
     upload(req, res, function (err) {
