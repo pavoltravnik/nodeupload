@@ -5,6 +5,8 @@ const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
 
+const { RPC_USERNAME, RPC_PASSWORD, RPC_IPADDRESS='not set', RPC_PORT } = proccess.env;
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/');
@@ -20,6 +22,25 @@ app.use(cors());
 
 app.get('/upload', function (req, res) {
     res.send('hello world');
+});
+
+app.get('/getrawtransaction', function (req, res) {
+    res.status(200).json(RPC_IPADDRESS);
+    /*
+    const formData = {
+        jsonrpc: '1.0',
+        id: 'curltext',
+        method: 'getblock',
+        params: ['07406e4cb9769803c5cf44bd965aaff91452a1d42c92295f1b3b1800f8b9680a'],
+    };
+
+    request.post({url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@${RPC_IPADDRESS}:${RPC_PORT}/`, formData: formData}, function(err, httpResponse, body) {
+        if (err) {
+            return res.status(500).json(err);
+        }
+        return res.status(200).json(body);
+    });
+    */
 });
 
 app.post('/upload',function(req, res) {
