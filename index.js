@@ -25,8 +25,6 @@ app.get('/upload', function (req, res) {
 });
 
 app.get('/getrawtransaction', function (req, res) {
-    res.status(200).json(RPC_USERNAME);
-    /*
     const formData = {
         jsonrpc: '1.0',
         id: 'curltext',
@@ -40,7 +38,6 @@ app.get('/getrawtransaction', function (req, res) {
         }
         return res.status(200).json(body);
     });
-    */
 });
 
 app.post('/upload',function(req, res) {
