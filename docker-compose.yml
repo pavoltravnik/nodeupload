@@ -8,7 +8,7 @@ services:
     env_file:
       - ~/.env
     volumes:
-      - ~/.litecoin:~/.litecoin
+      - ~/.litecoin:/data/.litecoin
     ports:
       - "9332:9332"
       - "9333:9333"
