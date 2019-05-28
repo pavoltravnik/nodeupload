@@ -15,4 +15,4 @@ RUN curl -O https://download.litecoin.org/litecoin-${LITECOIN_VERSION}/linux/lit
 
 EXPOSE 9332 9333
 
-CMD ["litecoind", "-txindex", "-disablewallet", "-daemon"]
+CMD ["litecoind", "-txindex", "-disablewallet"]
