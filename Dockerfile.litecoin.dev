@@ -5,7 +5,7 @@ RUN useradd -r litecoin \
   && apt-get install -y curl gnupg \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-  && set -ex \
+  && set -ex
 
 ENV LITECOIN_VERSION=0.17.1
 
