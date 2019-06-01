@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: Dockerfile.litecoin.dev
     env_file:
-      - ~/.env
+      - .env
     volumes:
       - .litecoin:/root/.litecoin
     ports:
