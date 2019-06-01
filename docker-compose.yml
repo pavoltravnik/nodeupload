@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     env_file:
-      - ~/.env
+      - .env
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
