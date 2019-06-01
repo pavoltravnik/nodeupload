@@ -8,7 +8,7 @@ services:
     env_file:
       - ~/.env
     volumes:
-      - /home/dockeruser/.litecoin:/root/.litecoin
+      - .litecoin:/root/.litecoin
     ports:
       - "9332:9332"
       - "9333:9333"
