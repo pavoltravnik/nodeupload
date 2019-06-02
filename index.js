@@ -41,12 +41,19 @@ app.get('/getrawtransaction', function (req, res) {
             return res.status(500).json(err);
         }
 
+        console.log(body);
+
+        const a = JSON.parse(body);
+
+        console.log(a);
+
         const formData = {
             jsonrpc: '1.0',
             id: 'curltext',
             method: 'decoderawtransaction',
-            params: [body.result],
+            params: [a.result],
         };
+
         request.post({
             headers: {'content-type' : 'text/plain'},
             url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
