@@ -58,9 +58,6 @@ app.get('/getrawtransaction', function (req, res) {
 
             return res.status(httpResponse.statusCode).json(body);
         });
-
-
-        return res.status(500).json(body);
     });
 });
 
