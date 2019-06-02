@@ -28,8 +28,8 @@ app.get('/getrawtransaction', function (req, res) {
     const formData = {
         jsonrpc: '1.0',
         id: 'curltext',
-        method: 'getblock',
-        params: ['07406e4cb9769803c5cf44bd965aaff91452a1d42c92295f1b3b1800f8b9680a'],
+        method: 'getrawtransaction',
+        params: ['d1a64f587bd21839ff6a3a76f65c43c2ddb06acb40ad9d3f7e8939c7f78260e8'],
     };
 
     request.post({
@@ -40,7 +40,26 @@ app.get('/getrawtransaction', function (req, res) {
         if (err) {
             return res.status(500).json(err);
         }
-        return res.status(httpResponse.statusCode).json(body);
+
+        if(body.result){
+            const formData = {
+                jsonrpc: '1.0',
+                id: 'curltext',
+                method: 'decoderawtransaction',
+                params: [JSON.parse(body.result)],
+            };
+            request.post({
+                headers: {'content-type' : 'text/plain'},
+                url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
+                body: JSON.stringify(formData)
+            }, function(err, httpResponse, body) {
+                if (err) {
+                    return res.status(500).json(err);
+                }
+
+                return res.status(httpResponse.statusCode).json(body);
+            });
+        }
     });
 });
 
