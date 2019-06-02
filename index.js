@@ -46,7 +46,7 @@ app.get('/getrawtransaction', function (req, res) {
                 jsonrpc: '1.0',
                 id: 'curltext',
                 method: 'decoderawtransaction',
-                params: [JSON.parse(body.result)],
+                params: [body.result],
             };
             request.post({
                 headers: {'content-type' : 'text/plain'},
