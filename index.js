@@ -32,7 +32,11 @@ app.get('/getrawtransaction', function (req, res) {
         params: ['07406e4cb9769803c5cf44bd965aaff91452a1d42c92295f1b3b1800f8b9680a'],
     };
 
-    request.post({url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`, formData: formData}, function(err, httpResponse, body) {
+    request.post({
+        headers: {'content-type' : 'Content-type: application/json'},
+        url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
+        formData: formData
+    }, function(err, httpResponse, body) {
         if (err) {
             return res.status(500).json(err);
         }
