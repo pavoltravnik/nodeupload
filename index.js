@@ -47,26 +47,26 @@ app.get('/getrawtransaction', function (req, res) {
 
         if(bodyParsed.result){
             console.log(bodyParsed.result);
+            const formData = {
+                jsonrpc: '1.0',
+                id: 'curltext',
+                method: 'decoderawtransaction',
+                params: [bodyParsed.result],
+            };
+
+            request.post({
+                headers: {'content-type' : 'text/plain'},
+                url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
+                body: JSON.stringify(formData)
+            }, function(err, httpResponse, body) {
+                if (err) {
+                    return res.status(500).json(err);
+                }
+
+                return res.status(httpResponse.statusCode).json(body);
+            });
         }
 
-        const formData = {
-            jsonrpc: '1.0',
-            id: 'curltext',
-            method: 'decoderawtransaction',
-            params: [bodyParsed.result],
-        };
-
-        request.post({
-            headers: {'content-type' : 'text/plain'},
-            url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
-            body: JSON.stringify(formData)
-        }, function(err, httpResponse, body) {
-            if (err) {
-                return res.status(500).json(err);
-            }
-
-            return res.status(httpResponse.statusCode).json(body);
-        });
 
     });
 });
