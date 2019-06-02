@@ -33,7 +33,7 @@ app.get('/getrawtransaction', function (req, res) {
     };
 
     request.post({
-        headers: {'content-type' : 'Content-type: application/json'},
+        headers: {'content-type' : 'application/json'},
         url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
         formData: formData
     }, function(err, httpResponse, body) {
