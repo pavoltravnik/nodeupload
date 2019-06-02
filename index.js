@@ -45,6 +45,10 @@ app.get('/getrawtransaction', function (req, res) {
 
         console.log(bodyParsed);
 
+        if(bodyParsed.result){
+            console.log(bodyParsed.result);
+        }
+
         const formData = {
             jsonrpc: '1.0',
             id: 'curltext',
