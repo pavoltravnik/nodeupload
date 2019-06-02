@@ -33,9 +33,9 @@ app.get('/getrawtransaction', function (req, res) {
     };
 
     request.post({
-        headers: {'content-type' : 'application/json'},
+        headers: {'content-type' : 'text/plain'},
         url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
-        formData: formData
+        body:`{"jsonrpc":"1.0","id":"curltext","method":"getblockchaininfo","params":[]}`
     }, function(err, httpResponse, body) {
         if (err) {
             return res.status(500).json(err);
