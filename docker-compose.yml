@@ -8,7 +8,7 @@ services:
       - .env
     volumes:
       - ./:/usr/src/app
-      - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
+      - /usr/src/app/node_modules
     ports:
       - "3000:3000"
 
@@ -24,3 +24,16 @@ services:
       - "9332:9332"
       - "9333:9333"
 
+  ipfs_host:
+    image: ipfs/go-ipfs:latest
+    container_name: ipfs_host
+    volumes:
+      - ./uploads:/export
+      - ./data:/data/ipfs
+    ports:
+      - "4001:4001"
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:5001:5001"
+    restart: always
+    environment:
+      - IPFS_PROFILE=server
