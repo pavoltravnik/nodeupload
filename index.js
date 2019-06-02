@@ -43,6 +43,8 @@ app.get('/getrawtransaction', function (req, res) {
 
         const bodyParsed = JSON.parse(body);
 
+        console.log(bodyParsed);
+
         if(bodyParsed.result){
             const formData = {
                 jsonrpc: '1.0',
