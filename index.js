@@ -41,25 +41,24 @@ app.get('/getrawtransaction', function (req, res) {
             return res.status(500).json(err);
         }
 
-        if(body.result){
-            const formData = {
-                jsonrpc: '1.0',
-                id: 'curltext',
-                method: 'decoderawtransaction',
-                params: [body.result],
-            };
-            request.post({
-                headers: {'content-type' : 'text/plain'},
-                url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
-                body: JSON.stringify(formData)
-            }, function(err, httpResponse, body) {
-                if (err) {
-                    return res.status(500).json(err);
-                }
+        const formData = {
+            jsonrpc: '1.0',
+            id: 'curltext',
+            method: 'decoderawtransaction',
+            params: [body.result],
+        };
+        request.post({
+            headers: {'content-type' : 'text/plain'},
+            url:`http://${RPC_USERNAME}:${RPC_PASSWORD}@litecoin:${RPC_PORT}/`,
+            body: JSON.stringify(formData)
+        }, function(err, httpResponse, body) {
+            if (err) {
+                return res.status(500).json(err);
+            }
 
-                return res.status(httpResponse.statusCode).json(body);
-            });
-        }
+            return res.status(httpResponse.statusCode).json(body);
+        });
+
 
         return res.status(500).json(body);
     });
