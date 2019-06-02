@@ -43,10 +43,7 @@ app.get('/getrawtransaction', function (req, res) {
 
         const bodyParsed = JSON.parse(body);
 
-        console.log(bodyParsed);
-
         if(bodyParsed.result){
-            console.log(bodyParsed.result);
             const formData = {
                 jsonrpc: '1.0',
                 id: 'curltext',
@@ -65,6 +62,8 @@ app.get('/getrawtransaction', function (req, res) {
 
                 return res.status(httpResponse.statusCode).json(body);
             });
+        } else {
+            return res.status(500).json('Body not parsed.');
         }
 
 
