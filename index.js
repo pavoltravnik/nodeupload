@@ -5,8 +5,6 @@ const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
 
-const { RPC_USERNAME, RPC_PASSWORD, RPC_IPADDRESS='not set', RPC_PORT } = process.env;
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/');
@@ -24,6 +22,17 @@ app.get('/upload', function (req, res) {
     res.send('hello world');
 });
 
+
+app.get('/getaddressTXs', function (req, res) {
+    request('https://api.blockcypher.com/v1/ltc/main/addrs/LeNkYGHa9wkZN88acBh6RnMuDo214xh29G/full?after=1621253', function (error, response, body) {
+        console.error('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('body:', body); // Print the HTML for the Google homepage.
+      });
+
+});
+
+/*
 app.get('/getrawtransaction', function (req, res) {
     const formData = {
         jsonrpc: '1.0',
@@ -69,6 +78,7 @@ app.get('/getrawtransaction', function (req, res) {
 
     });
 });
+*/
 
 app.post('/upload',function(req, res) {
     upload(req, res, function (err) {

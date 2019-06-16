@@ -4,25 +4,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    env_file:
-      - .env
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
-
-  litecoin:
-    build:
-      context: .
-      dockerfile: Dockerfile.litecoin.dev
-    env_file:
-      - .env
-    volumes:
-      - .litecoin:/root/.litecoin
-    ports:
-      - "9332:9332"
-      - "9333:9333"
 
   ipfs_host:
     image: ipfs/go-ipfs:latest
