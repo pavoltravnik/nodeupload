@@ -4,6 +4,8 @@ const multer = require('multer')
 const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
+const utils = require('./utils');
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,13 +24,13 @@ app.get('/upload', function (req, res) {
     res.send('hello world');
 });
 
-
+//BlockCypher
 app.get('/getaddressTXs', function (req, res) {
     request('https://api.blockcypher.com/v1/ltc/main/addrs/LeNkYGHa9wkZN88acBh6RnMuDo214xh29G/full?after=1621253', function (error, response, body) {
         if (error) {
             return res.status(500).json(error);
         }
-        return res.status(response.statusCode).json(JSON.parse(body));
+        return res.status(response.statusCode).json(JSON.parse(body).txs.outputs.map(op_return => op_return.hasOwnProperty("data_string") ? op_return.data_string : null));
       });
 
 });
