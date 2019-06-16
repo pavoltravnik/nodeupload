@@ -29,7 +29,8 @@ app.get('/getaddressTXs', function (req, res) {
         if (error) {
             return res.status(500).json(error);
         }
-        return res.status(response.statusCode).json(JSON.parse(body).txs.outputs.map(op_return => op_return.hasOwnProperty("data_string") ? op_return.data_string : null));
+        const a = JSON.parse(body);
+        return res.status(response.statusCode).json(a.txs);
       });
 
 });
