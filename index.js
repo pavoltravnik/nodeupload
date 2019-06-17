@@ -25,6 +25,7 @@ app.get('/upload', function (req, res) {
 
 
 app.get('/something', (req, res) => {
+    console.log(req.query);
     res.send(req.query.color);
 })
 
