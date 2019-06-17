@@ -30,7 +30,7 @@ app.get('/getaddressTXs', function (req, res) {
             return res.status(500).json(error);
         }
         const op_returns = JSON.parse(body).txs.filter(tx => tx.inputs.some(input => input.addresses.includes('LYrNwwF5T6dfoFEMPttf6ZVQ3bdkK79w4w'))).map(tx => tx.outputs.map(output => output.hasOwnProperty("data_string") === true ? output.data_string : null))[0];
-        return res.status(response.statusCode).json(JSON.parse(op_returns));
+        return res.status(response.statusCode).json(op_returns);
       });
 });
 
