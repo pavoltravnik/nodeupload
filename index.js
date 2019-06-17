@@ -44,8 +44,11 @@ app.get('/getaddressTXsBB', function (req, res) {
         }
         try {
             const txids = JSON.parse(body).txids;
+            console.log('txids', txids);
             const inputs = txids.map(txid => {
+                console.log('txid', txid);
                 request({url: `https://89.221.219.26:9134/api/v2/tx/${txid}`, rejectUnauthorized: false}, function (error, response, body) {
+                    console.log(JSON.parse(body));
                     return JSON.parse(body).vin;
                 })
             });
