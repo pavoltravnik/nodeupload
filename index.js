@@ -42,22 +42,17 @@ app.get('/getaddressTXsBB', function (req, res) {
         if (error) {
             return res.status(500).json(error);
         }
-        console.log(JSON.parse(body).txids);
-        /*
         try {
-            body.txids.map(txid => {
+            const txids = JSON.parse(body).txids;
+            const inputs = txids.map(txid => {
                 request(`https://89.221.219.26:9134/api/v2/tx/${txid}`, function (error, response, body) {
-                    if (error) {
-                        throw error;
-                    }
-                    return body.vin;
-                }
+                    return JSON.parse(body).vin;
+                })
             });
+            return res.status(response.statusCode).json(inputs);
         } catch(error) {
             return res.status(500).send(error);
         }
-        */
-        return res.status(response.statusCode).json(body.txids);
     });
 });
 
