@@ -31,8 +31,34 @@ app.get('/getaddressTXs', function (req, res) {
         }
         const op_returns = JSON.parse(body).txs.filter(tx => tx.inputs.some(input => input.addresses.includes('LYrNwwF5T6dfoFEMPttf6ZVQ3bdkK79w4w'))).map(tx => tx.outputs.map(output => output.hasOwnProperty("data_string") === true ? output.data_string : null))[0];
         return res.status(response.statusCode).json(op_returns);
-      });
+    });
 });
+
+
+//Internal Server
+app.get('/getaddressTXsBB', function (req, res) {
+    request(`https://89.221.219.26:9134/api/v2/address/${req.query.address}`, function (error, response, body) {
+        if (error) {
+            return res.status(500).json(error);
+        }
+        try {
+            /*
+            body.txids.map(txid => {
+                request(`https://89.221.219.26:9134/api/v2/tx/${txid}`, function (error, response, body) {
+                    if (error) {
+                        throw error;
+                    }
+                    return body.vin;
+                }
+            });
+            */
+        } catch(error) {
+            return res.status(500).send(error);
+        }
+        return res.status(response.statusCode).json(body.txids);
+    });
+});
+
 
 /*
 app.get('/getrawtransaction', function (req, res) {
