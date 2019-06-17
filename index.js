@@ -42,7 +42,7 @@ app.get('/getaddressTXsBB', function (req, res) {
         if (error) {
             return res.status(500).json(error);
         }
-        console.log(body);
+        console.log(JSON.parse(body).txids);
         /*
         try {
             body.txids.map(txid => {
