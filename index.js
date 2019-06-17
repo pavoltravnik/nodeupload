@@ -29,7 +29,7 @@ app.get('/getaddressTXs', async function (req, res) {
     try {
         const response = await axios.get(`https://api.blockcypher.com/v1/ltc/main/addrs/${req.query.address}/full?after=1611253`);
         const op_returns = response.data.txs.filter(tx => tx.inputs.some(input => input.addresses.includes('LYrNwwF5T6dfoFEMPttf6ZVQ3bdkK79w4w'))).map(tx => tx.outputs.map(output => output.hasOwnProperty("data_string") === true ? output.data_string : null))[0];
-        return res.status(response.status).json(op_returns);
+        return res.status(response.status).json(response);
     } catch (e) {
         return res.status(500).send(e);
     }
