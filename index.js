@@ -24,9 +24,9 @@ app.get('/upload', function (req, res) {
 });
 
 
-app.post('/aaa', function (req, res) {
-    res.send('POST request to the homepage')
-  })
+app.get('/something', (req, res) => {
+    res.send(req.query.color);
+})
 
 //BlockCypher
 app.post('/getaddressTXs', function (req, res) {
