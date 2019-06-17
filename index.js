@@ -45,12 +45,11 @@ app.get('/getaddressTXsBB', function (req, res) {
         try {
             const txids = JSON.parse(body).txids;
             const inputs = txids.map(txid => {
-                request({url: `https://89.221.219.26:9134/api/v2/tx/${txid}`, rejectUnauthorized: false}, function (error, response, body) {
-                    console.log(JSON.parse(body).vin);
-                    return JSON.parse(body).vin;
-                })
+                const a = request({url: `https://89.221.219.26:9134/api/v2/tx/${txid}`, rejectUnauthorized: false}, function (error, response, body) {
+                    return body;
+                });
+                return a;
             });
-            console.log('inputs',inputs);
             return res.status(response.statusCode).json(inputs);
         } catch(error) {
             return res.status(500).send(error);
