@@ -5,6 +5,7 @@ const cors = require('cors');
 const fs = require('fs');
 const request = require('request');
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
