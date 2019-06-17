@@ -23,6 +23,11 @@ app.get('/upload', function (req, res) {
     res.send('hello world');
 });
 
+
+app.post('/aaa', function (req, res) {
+    res.send('POST request to the homepage')
+  })
+
 //BlockCypher
 app.post('/getaddressTXs', function (req, res) {
     res.send('POST request to homepage');
