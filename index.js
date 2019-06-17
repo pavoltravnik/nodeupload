@@ -25,7 +25,16 @@ app.get('/upload', function (req, res) {
 });
 
 //BlockCypher
-app.get('/getaddressTXs', function (req, res) {
+app.get('/getaddressTXs', async function (req, res) {
+    try {
+        const response = await axios.get(`https://api.blockcypher.com/v1/ltc/main/addrs/${req.query.address}/full?after=1611253`);
+        const op_returns = response.data.txs.filter(tx => tx.inputs.some(input => input.addresses.includes('LYrNwwF5T6dfoFEMPttf6ZVQ3bdkK79w4w'))).map(tx => tx.outputs.map(output => output.hasOwnProperty("data_string") === true ? output.data_string : null))[0];
+        return res.status(response.status).json(op_returns);
+    } catch (e) {
+        return res.status(500).send(e);
+    }
+
+    /*
     request(`https://api.blockcypher.com/v1/ltc/main/addrs/${req.query.address}/full?after=1611253`, function (error, response, body) {
         if (error) {
             return res.status(500).json(error);
@@ -33,6 +42,7 @@ app.get('/getaddressTXs', function (req, res) {
         const op_returns = JSON.parse(body).txs.filter(tx => tx.inputs.some(input => input.addresses.includes('LYrNwwF5T6dfoFEMPttf6ZVQ3bdkK79w4w'))).map(tx => tx.outputs.map(output => output.hasOwnProperty("data_string") === true ? output.data_string : null))[0];
         return res.status(response.statusCode).json(op_returns);
     });
+    */
 });
 
 
