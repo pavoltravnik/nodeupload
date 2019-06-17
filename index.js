@@ -38,7 +38,7 @@ app.get('/getaddressTXs', function (req, res) {
 
 //Internal Server
 app.get('/getaddressTXsBB', function (req, res) {
-    request(`https://89.221.219.26:9134/api/v2/address/${req.query.address}`, function (error, response, body) {
+    request({url: `https://89.221.219.26:9134/api/v2/address/${req.query.address}`, rejectUnauthorized: false}, function (error, response, body) {
         if (error) {
             return res.status(500).json(error);
         }
